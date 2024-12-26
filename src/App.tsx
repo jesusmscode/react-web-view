@@ -1,4 +1,12 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+
+declare global {
+  interface Window {
+    ReactNativeWebView?: {
+      postMessage: (message: string) => void;
+    };
+  }
+}
 
 const App = () => {
   const [deviceId, setDeviceId] = useState("");
@@ -17,7 +25,7 @@ const App = () => {
     }
   };
 
-  const handleMessage = (event) => {
+  const handleMessage = (event: MessageEvent) => {
     console.log("Received message:", event.data);
     try {
       const data = JSON.parse(event.data);
