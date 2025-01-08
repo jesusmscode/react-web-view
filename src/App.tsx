@@ -1,49 +1,27 @@
-import { useEffect, useState } from "react";
-
-declare global {
-  interface Window {
-    ReactNativeWebView?: {
-      postMessage: (message: string) => void;
-    };
-  }
-}
+import React, { useState, useEffect } from "react";
 
 const App = () => {
-  const [deviceId, setDeviceId] = useState("none");
-  const [model, setModel] = useState("model");
-
-  const sendMessage = () => {
-    if (window.ReactNativeWebView) {
-      const message = {
-        type: "request",
-        request: {
-          id: "uhujdkgvai",
-          operation: "getSystemInfo",
-        },
-      };
-      window.ReactNativeWebView.postMessage(JSON.stringify(message));
-    }
-  };
-
-  const handleMessage = (event: MessageEvent) => {
-    console.log("Received message:", event.data);
-    try {
-      const data = JSON.parse(event.data);
-      if (data.type === "response" && data.request.id === "uhujdkgvai") {
-        const response = data.response;
-        setDeviceId(response.deviceId);
-        setModel(response.model);
-      }
-    } catch (error) {
-      console.error("Error parsing message:", error);
-    }
-  };
+  const [deviceId, setDeviceId] = useState("");
+  const [model, setModel] = useState("");
 
   useEffect(() => {
-    sendMessage();
+    function handleMessage(event: MessageEvent) {
+      try {
+        const data = JSON.parse(event.data);
+        if (
+          data.type === "response" &&
+          data.request.operation === "getSystemInfo"
+        ) {
+          setDeviceId(data.response.deviceId);
+          setModel(data.response.model);
+        }
+      } catch (error) {
+        console.error("Error procesando el mensaje:", error);
+      }
+    }
+
     window.addEventListener("message", handleMessage);
 
-    // Cleanup listener on unmount
     return () => {
       window.removeEventListener("message", handleMessage);
     };
