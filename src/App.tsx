@@ -32,14 +32,14 @@ const App = () => {
     const message = {
       type: "request",
       request: {
-        id: "unique-id",
+        id: "3r243r43r423r",
         operation: "logMessage",
         message: "Hello from WebView",
       },
     };
-    window.postMessage(JSON.stringify(message));
+    window.ReactNativeWebView.postMessage(JSON.stringify(message));
     setFeedback("Message sent to native!");
-    console.log("messa", JSON.stringify(message));
+    console.log("Message sent:", JSON.stringify(message));
   };
 
   return (
