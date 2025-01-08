@@ -8,7 +8,7 @@ const App = () => {
     console.log("====================================");
     console.log("useEffect");
     console.log("====================================");
-    function handleMessage(event) {
+    function handleMessage(event: MessageEvent) {
       try {
         const data = JSON.parse(event.data);
         console.log("====================================");
