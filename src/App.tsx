@@ -9,8 +9,8 @@ declare global {
 }
 
 const App = () => {
-  const [deviceId, setDeviceId] = useState("");
-  const [model, setModel] = useState("");
+  const [deviceId, setDeviceId] = useState("none");
+  const [model, setModel] = useState("model");
 
   const sendMessage = () => {
     if (window.ReactNativeWebView) {
