@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
-
+declare global {
+  interface Window {
+    ReactNativeWebView: {
+      postMessage: (message: string) => void;
+    };
+  }
+}
 const App = () => {
   const [deviceId, setDeviceId] = useState("");
   const [model, setModel] = useState("");
