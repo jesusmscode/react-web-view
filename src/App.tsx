@@ -36,7 +36,7 @@ const App = () => {
         message: "Hello from WebView",
       },
     };
-    window.ReactNativeWebView.postMessage(JSON.stringify(message));
+    window.postMessage(JSON.stringify(message));
   };
 
   return (
