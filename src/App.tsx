@@ -39,7 +39,7 @@ const App = () => {
     };
     window.postMessage(JSON.stringify(message));
     setFeedback("Message sent to native!");
-    console.log("Message sent to native!");
+    console.log("messa", JSON.stringify(message));
   };
 
   return (
