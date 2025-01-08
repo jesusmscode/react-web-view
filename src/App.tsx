@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 const App = () => {
   const [deviceId, setDeviceId] = useState("");
   const [model, setModel] = useState("");
+  const [feedback, setFeedback] = useState("");
 
   useEffect(() => {
     function handleMessage(event: MessageEvent) {
@@ -37,6 +38,7 @@ const App = () => {
       },
     };
     window.postMessage(JSON.stringify(message));
+    setFeedback("Message sent to native!");
   };
 
   return (
@@ -45,6 +47,7 @@ const App = () => {
       <p>Device ID: {deviceId}</p>
       <p>Model: {model}</p>
       <button onClick={sendMessageToNative}>Send Log Message</button>
+      {feedback && <p>{feedback}</p>}
     </div>
   );
 };
