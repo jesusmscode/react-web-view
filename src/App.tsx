@@ -5,15 +5,9 @@ const App = () => {
   const [model, setModel] = useState("");
 
   useEffect(() => {
-    console.log("====================================");
-    console.log("useEffect");
-    console.log("====================================");
     function handleMessage(event: MessageEvent) {
       try {
         const data = JSON.parse(event.data);
-        console.log("====================================");
-        console.log(data);
-        console.log("====================================");
         if (
           data.type === "response" &&
           data.request.operation === "getSystemInfo"
@@ -33,11 +27,24 @@ const App = () => {
     };
   }, []);
 
+  const sendMessageToNative = () => {
+    const message = {
+      type: "request",
+      request: {
+        id: "unique-id",
+        operation: "logMessage",
+        message: "Hello from WebView",
+      },
+    };
+    window.ReactNativeWebView.postMessage(JSON.stringify(message));
+  };
+
   return (
     <div>
       <h1>Device Information</h1>
       <p>Device ID: {deviceId}</p>
       <p>Model: {model}</p>
+      <button onClick={sendMessageToNative}>Send Log Message</button>
     </div>
   );
 };
