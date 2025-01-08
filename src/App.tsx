@@ -5,9 +5,15 @@ const App = () => {
   const [model, setModel] = useState("");
 
   useEffect(() => {
-    function handleMessage(event: MessageEvent) {
+    console.log("====================================");
+    console.log("useEffect");
+    console.log("====================================");
+    function handleMessage(event) {
       try {
         const data = JSON.parse(event.data);
+        console.log("====================================");
+        console.log(data);
+        console.log("====================================");
         if (
           data.type === "response" &&
           data.request.operation === "getSystemInfo"
@@ -29,13 +35,9 @@ const App = () => {
 
   return (
     <div>
-      <h1>Hola Mundo</h1>
-      <p>
-        Device ID: <span>{deviceId}</span>
-      </p>
-      <p>
-        Model: <span>{model}</span>
-      </p>
+      <h1>Device Information</h1>
+      <p>Device ID: {deviceId}</p>
+      <p>Model: {model}</p>
     </div>
   );
 };
