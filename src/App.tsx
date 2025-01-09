@@ -14,6 +14,9 @@ const App = () => {
 
   useEffect(() => {
     function handleMessage(event: MessageEvent) {
+      console.log("====================================");
+      console.log("Event received:", event);
+      console.log("====================================");
       console.log("Message received:", event.data);
 
       try {
