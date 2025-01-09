@@ -6,6 +6,7 @@ declare global {
     };
   }
 }
+
 const App = () => {
   const [deviceId, setDeviceId] = useState("");
   const [model, setModel] = useState("");
@@ -16,7 +17,7 @@ const App = () => {
       console.log("Message received:", event.data);
 
       try {
-        const data = JSON.parse(event.data.response);
+        const data = JSON.parse(event.data);
         if (
           data.type === "response" &&
           data.request.operation === "getSystemInfo"
