@@ -16,7 +16,7 @@ const App = () => {
       console.log("Message received:", event.data);
 
       try {
-        const data = JSON.parse(event.data);
+        const data = JSON.parse(event.data.response);
         if (
           data.type === "response" &&
           data.request.operation === "getSystemInfo"
