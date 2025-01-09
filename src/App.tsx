@@ -13,7 +13,7 @@ const App = () => {
   const [feedback, setFeedback] = React.useState("");
 
   useEffect(() => {
-    const handleMessage = (event) => {
+    const handleMessage = (event: MessageEvent) => {
       const data1 = JSON.parse(event?.data);
       console.log("Data received:", data1);
       try {
