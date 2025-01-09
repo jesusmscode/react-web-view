@@ -13,6 +13,8 @@ const App = () => {
 
   useEffect(() => {
     function handleMessage(event: MessageEvent) {
+      console.log("Message received:", event.data);
+
       try {
         const data = JSON.parse(event.data);
         if (
