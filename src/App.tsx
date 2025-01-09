@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 declare global {
   interface Window {
     ReactNativeWebView: {
@@ -8,14 +8,12 @@ declare global {
 }
 
 const App = () => {
-  const [deviceId, setDeviceId] = useState("");
-  const [model, setModel] = useState("");
-  const [feedback, setFeedback] = useState("");
+  const [deviceId, setDeviceId] = React.useState(null);
+  const [model, setModel] = React.useState(null);
+  const [feedback, setFeedback] = React.useState("");
 
   useEffect(() => {
-    console.log("====================================");
-    function handleMessage(event: MessageEvent) {
-      console.log("====================================");
+    const handleMessage = (event) => {
       const data1 = JSON.parse(event?.data);
       console.log("Data received:", data1);
       try {
@@ -33,7 +31,7 @@ const App = () => {
       } catch (error) {
         console.error("Error procesando el mensaje:", error);
       }
-    }
+    };
 
     window.addEventListener("message", handleMessage);
 
