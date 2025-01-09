@@ -22,9 +22,6 @@ const App = () => {
           data.type === "response" &&
           data.request.operation === "getSystemInfo"
         ) {
-          console.log("====================================");
-          console.log("Device ID:", data.response.deviceId);
-          console.log("====================================");
           setDeviceId(data.response.deviceId);
           setModel(data.response.model);
         }
@@ -32,9 +29,9 @@ const App = () => {
         console.error("Error procesando el mensaje:", error);
       }
     };
-
     window.addEventListener("message", handleMessage);
-
+  }, [feedback]);
+  const sendMessageRequesSystemToNative = () => {
     const message = {
       type: "request",
       request: {
@@ -43,12 +40,9 @@ const App = () => {
       },
     };
     window.ReactNativeWebView.postMessage(JSON.stringify(message));
-
-    return () => {
-      window.removeEventListener("message", handleMessage);
-    };
-  }, []);
-
+    setFeedback("Message sent to native1!");
+    console.log("Message sent:", JSON.stringify(message));
+  };
   const sendMessageToNative = () => {
     const message = {
       type: "request",
@@ -59,7 +53,7 @@ const App = () => {
       },
     };
     window.ReactNativeWebView.postMessage(JSON.stringify(message));
-    setFeedback("Message sent to native!");
+    setFeedback("Message sent to native2!");
     console.log("Message sent:", JSON.stringify(message));
   };
 
@@ -69,6 +63,9 @@ const App = () => {
       <p>Device ID: {deviceId}</p>
       <p>Model: {model}</p>
       <button onClick={sendMessageToNative}>Send Log Message</button>
+      <button onClick={sendMessageRequesSystemToNative}>
+        Send request systeminfo
+      </button>
       {feedback && <p>{feedback}</p>}
     </div>
   );
