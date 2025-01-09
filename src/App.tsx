@@ -13,6 +13,7 @@ const App = () => {
   const [feedback, setFeedback] = useState("");
 
   useEffect(() => {
+    console.log("====================================");
     function handleMessage(event: MessageEvent) {
       console.log("====================================");
       const data1 = JSON.parse(event?.data);
