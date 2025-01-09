@@ -15,7 +15,8 @@ const App = () => {
   useEffect(() => {
     function handleMessage(event: MessageEvent) {
       console.log("====================================");
-
+      const data1 = JSON.parse(event?.data);
+      console.log("Data received:", data1);
       try {
         const data = JSON.parse(event.data);
         if (
