@@ -40,7 +40,7 @@ const App = () => {
         operation: "getSystemInfo",
       },
     };
-    window.ReactNativeWebView.postMessage(JSON.stringify(message));
+    window.onMessageFromNative.postMessage(JSON.stringify(message));
     setFeedback("Message sent to native1!");
     console.log("Message sent:", JSON.stringify(message));
   };
