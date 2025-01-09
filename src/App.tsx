@@ -25,6 +25,9 @@ const App = () => {
           data.type === "response" &&
           data.request.operation === "getSystemInfo"
         ) {
+          console.log("====================================");
+          console.log("Device ID:", data.response.deviceId);
+          console.log("====================================");
           setDeviceId(data.response.deviceId);
           setModel(data.response.model);
         }
@@ -35,7 +38,6 @@ const App = () => {
 
     window.addEventListener("message", handleMessage);
 
-    // Enviar solicitud de getSystemInfo al cargar
     const message = {
       type: "request",
       request: {
