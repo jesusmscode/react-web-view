@@ -29,6 +29,16 @@ const App = () => {
 
     window.addEventListener("message", handleMessage);
 
+    // Enviar solicitud de getSystemInfo al cargar
+    const message = {
+      type: "request",
+      request: {
+        id: "3r243r43r423r",
+        operation: "getSystemInfo",
+      },
+    };
+    window.ReactNativeWebView.postMessage(JSON.stringify(message));
+
     return () => {
       window.removeEventListener("message", handleMessage);
     };
